@@ -11,6 +11,7 @@
 .row {
   display: flex;
   flex-wrap: wrap;
+  padding: 0.3rem;
 }
 
 .column-full,
@@ -25,7 +26,7 @@
 
   .column-full,
   .column-half {
-    padding: 0 0.75rem;
+    padding: 0 0.3rem;
   }
 
   .column-half {
