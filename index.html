@@ -16,15 +16,17 @@
 </head>
 <body>
   <header>
-    <h2 class="banner">Code Journal</h2>
+
   </header>
   <main></main>
 
-  <div data-view="entry-form">
-    <div class="container"></div>
+  <div data-view="entry-form" class="entry-journal hidden">
+
+    <h2 class="banner">Code Journal</h2>
+
       <form>
         <div class="row">
-          <div class="title"><h1>New Entry</h1></div>
+          <div><h1>New Entry</h1></div>
         </div>
 
         <div class="row">
@@ -51,6 +53,25 @@
 
       </form>
     </div>
+
+
+    <div data-view="entries" class="entries-journal">
+      <h2 class="banner">Code Journal &nbsp;&nbsp;&nbsp;<span class="sub-title">Entries</span></h2>
+
+      <div class="row-title">
+        <div class="column-half"><div class="container-entries"><h1><span class="title"></span>Entries</h1></div></div>
+        <div class="column-half"><div class="container-submit"><button class="new-button">NEW</button></div></div>
+      </div>
+
+      <div class="no-entry-message">
+          <p>No entries have been recorded</p>
+      </div>
+      <div class="ul-div">
+        <ul></ul>
+      </div>
+
+    </div>
+
 
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
