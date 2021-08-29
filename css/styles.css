@@ -102,6 +102,14 @@ img {
   padding-right: 20%;
 }
 
+.fas {
+  color: rgb(81, 8, 133);
+}
+
+.pencil {
+  float: right;
+}
+
 input:focus,
 textarea:focus {
   outline: none;
