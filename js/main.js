@@ -11,8 +11,15 @@ const $entryForm = document.querySelector('.entry-journal');
 const $entries = document.querySelector('.entries-journal');
 const $noEntry = document.querySelector('.no-entry-message');
 const $imageElement = document.querySelector('img');
+const $deleteConfirmation = document.querySelector('.delete-confirmation');
 
 const $taskList = document.querySelector('.task-list');
+
+const $deleteEntryLink = document.querySelector('.delete-entry');
+const $deleteEntryCancel = document.querySelector('.button-cancel');
+const $deleteEntryConfirm = document.querySelector('.button-confirm');
+
+const $overlay = document.querySelector('.overlay');
 
 if (data.entries.length !== 0) {
   $noEntry.className = 'hidden';
@@ -35,6 +42,8 @@ function handleClickNew(event) {
 }
 
 $clickNew.addEventListener('click', handleClickNew);
+
+/** ***** List of entries ***********/
 
 function newEntryDOM(jornalElement) {
 
@@ -76,9 +85,11 @@ function newEntryDOM(jornalElement) {
 
 }
 
+/** ***** Add entry - submit event******/
+
 function handleSubmit(event) {
   event.preventDefault();
-  var photo = '';
+  let photo = '';
 
   if ($PhotoURL.value === '') {
     photo = 'images/placeholder-image-square.jpg';
@@ -87,8 +98,8 @@ function handleSubmit(event) {
   }
 
   if (data.editing !== null) {
-    var index = data.editing.entryId;
-    for (var i = 0; i < data.entries.length; i++) {
+    const index = data.editing.entryId;
+    for (let i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryId === index) {
         data.entries[i].title = $title.value;
         data.entries[i].photoURL = photo;
@@ -103,7 +114,6 @@ function handleSubmit(event) {
       photoURL: photo,
       note: $notes.value,
       entryId: data.nextEntryId
-
     };
 
     data.entries.unshift(formObject);
@@ -138,11 +148,13 @@ function handleDOMContentLoaded(event) {
 
 window.addEventListener('DOMContentLoaded', handleDOMContentLoaded);
 
+/** ********** Edit entries ***********/
+
 function handleClickEntry(event) {
 
   if (event.target.tagName === 'I') {
-    var listEntryId = event.target.getAttribute('data-entry-id');
-    for (var i = 0; i < data.entries.length; i++) {
+    const listEntryId = event.target.getAttribute('data-entry-id');
+    for (let i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryId === parseInt(listEntryId)) {
         data.editing = data.entries[i];
         $title.value = data.entries[i].title;
@@ -157,8 +169,56 @@ function handleClickEntry(event) {
     }
     $entryForm.className = 'entry';
     $entries.className = 'hidden';
+    $deleteEntryLink.className = 'delete-entry';
     document.querySelector('ul').innerHTML = '';
   }
 }
 
 $taskList.addEventListener('click', handleClickEntry);
+
+/** ***** Delete entry link **********/
+
+function handleDeleteEntry(event) {
+  $deleteConfirmation.className = 'delete-confirmation';
+  $overlay.className = 'overlay';
+}
+
+$deleteEntryLink.addEventListener('click', handleDeleteEntry);
+
+/** ***********Cancel delete**********/
+
+function handleDeleteEntryCancel(event) {
+  $deleteConfirmation.className = 'delete-confirmation hidden';
+  $entryForm.className = 'entry-journal';
+  $overlay.className = 'overlay hidden';
+}
+
+$deleteEntryCancel.addEventListener('click', handleDeleteEntryCancel);
+
+/** ******* Delete entries ***********/
+
+function handleDeleteConfirm(event) {
+  $deleteConfirmation.className = 'delete-confirmation hidden';
+  $overlay.className = 'overlay hidden';
+
+  for (let i = 0; i < data.entries.length; i++) {
+    if (data.editing.entryId === data.entries[i].entryId) {
+      data.entries.splice(i, 1);
+    }
+  }
+
+  $imageElement.src = 'images/placeholder-image-square.jpg';
+  $entryForm.className = 'hidden';
+  $entries.className = 'entries-journal';
+  $noEntry.className = 'hidden';
+  $deleteEntryLink.className = 'delete-entry hidden';
+
+  $form.reset();
+  for (let i = 0; i < data.entries.length; i++) {
+    newEntryDOM(i);
+  }
+
+  data.editing = null;
+}
+
+$deleteEntryConfirm.addEventListener('click', handleDeleteConfirm);
