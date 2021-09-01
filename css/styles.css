@@ -6,7 +6,6 @@ body {
 }
 
 form {
-  margin: 3rem auto;
   padding-left: 20%;
   padding-right: 20%;
 }
@@ -29,7 +28,11 @@ img {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   margin-top: 0;
-  margin-bottom: 5%;
+}
+
+.new-entry {
+  padding-left: 20%;
+  margin: 0;
 }
 
 .sub-title {
@@ -75,6 +78,7 @@ img {
 .container-submit {
   flex-basis: 100%;
   text-align: right;
+  cursor: pointer;
 }
 
 .container-entries {
@@ -110,7 +114,64 @@ img {
   float: right;
 }
 
-input:focus,
+.delete-entry {
+  float: left;
+  color: red;
+  text-decoration: underline;
+}
+
+.button-confirm {
+  font-size: 0.7rem;
+  background-color: red;
+  border-style: none;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 3px;
+  margin: 8%;
+}
+
+.button-cancel {
+  font-size: 0.7rem;
+  background-color: #bebebe;
+  border-style: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 3px;
+  margin: 8%;
+}
+
+.pop-up {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  font-size: 0.8rem;
+  padding-top: 15px;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 300px;
+  height: 130px;
+  background: gray;
+  background-color: white;
+  text-align: center;
+  border-radius: 0.25rem;
+}
+
+.overlay {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.7);
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+* input:focus,
 textarea:focus {
   outline: none;
   border: 1px solid rgb(150, 66, 233);
